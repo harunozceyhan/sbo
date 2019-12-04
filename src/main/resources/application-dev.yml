@@ -1,0 +1,40 @@
+server:
+    port: 8085
+spring:
+    application:
+        id: sbo-service
+        name: sbo-service  
+    cloud:
+        consul:
+            enabled: true
+            host: consul.smart
+            port: 8500
+            config:
+                enabled: true
+    jpa:
+        hibernate:
+            ddl-auto: update
+        properties:
+            javax:
+                persistence:
+                    schema-generation:
+                        create-source: metadata
+                        scripts:
+                            action: create
+                            create-target: create.sql
+            hibernate: 
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+                jdbc: 
+                    lob:
+                        non_contextual_creation: true
+    datasource:
+        url: jdbc:postgresql://postgres-12.smart:5432/postgres
+        username: postgres
+        password: 1234
+        continue-on-error: false
+    flyway: 
+        locations: classpath:db/migration
+        url: jdbc:postgresql://postgres-12.smart:5432/postgres
+        schemas: postgres
+        user: postgres
+        password: 1234
