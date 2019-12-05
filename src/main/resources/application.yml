@@ -12,6 +12,8 @@ spring:
             config:
                 enabled: true
     jpa:
+        generate-ddl: true
+        show-sql: true
         hibernate:
             ddl-auto: update
         properties:
@@ -19,10 +21,9 @@ spring:
                 persistence:
                     schema-generation:
                         create-source: metadata
-                        scripts:
-                            action: create
-                            create-target: create.sql
             hibernate: 
+                hbm2ddl:
+                    auto: update
                 dialect: org.hibernate.dialect.PostgreSQLDialect
                 jdbc: 
                     lob:
