@@ -1,17 +1,20 @@
 package com.smart.sbo.domain.beden;
 
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.smart.sbo.domain.base.BaseEntity;
-
 import org.springframework.data.rest.core.annotation.RestResource;
 
 @Table(name = "siparis", schema = "postgres")
@@ -32,10 +35,14 @@ public class Siparis extends BaseEntity {
     @Column(nullable=false, length=10)
     private String kodu;
 
-    @OneToOne
+    @ManyToOne
     @NotNull
-    @RestResource(path = "ops", rel = "ops", exported = false)
+    @RestResource(exported = false)
     private Operation operation;
+
+    @OneToMany(mappedBy = "siparis", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Worker> workers;
 
     public Long getId() {
       return id;
@@ -68,5 +75,13 @@ public class Siparis extends BaseEntity {
     public void setOperation(Operation operation) {
       this.operation = operation;
     }
+
+  public Set<Worker> getWorkers() {
+    return workers;
+  }
+
+  public void setWorkers(Set<Worker> workers) {
+    this.workers = workers;
+  }
 
 }
