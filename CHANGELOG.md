@@ -4,7 +4,6 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [1.1.5](https://github.com/harunozceyhan/sbo/compare/v1.1.4...v1.1.5) (2019-12-06)
 
-
 ### Yenilikler
 
 * new release 1.1.5 ([7bccf08](https://github.com/harunozceyhan/sbo/commit/7bccf08a33888379e0f05c2d89edc880e308d740))
