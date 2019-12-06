@@ -26,5 +26,17 @@
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
+  },
+  "standard-version": {
+    "types": [
+      {"type": "feat", "hidden": true},
+      {"type": "fix", "hidden": true},
+      {"type": "chore", "hidden": true},
+      {"type": "docs", "section": "new"},
+      {"type": "style", "hidden": true},
+      {"type": "refactor", "hidden": true},
+      {"type": "perf", "hidden": true},
+      {"type": "test", "hidden": true}
+    ]
   }
 }
