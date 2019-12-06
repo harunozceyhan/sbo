@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.3](https://github.com/harunozceyhan/sbo/compare/v1.1.2...v1.1.3) (2019-12-06)
+
+
+### new
+
+* testing standard-version ([9091498](https://github.com/harunozceyhan/sbo/commit/90914982aade0d530197782a39c6903f3aed818a))
+
 ### [1.1.2](https://github.com/harunozceyhan/sbo/compare/v1.1.0...v1.1.2) (2019-12-06)
 
 ## 1.1.0 (2019-12-06)
