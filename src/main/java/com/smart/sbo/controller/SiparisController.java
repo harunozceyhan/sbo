@@ -5,6 +5,7 @@ import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import java.util.Optional;
 import com.smart.sbo.domain.beden.Siparis;
 import com.smart.sbo.repository.SiparisRepository;
@@ -18,7 +19,7 @@ public class SiparisController {
 
     @GetMapping("/getport")
     public ResponseEntity<Optional<Siparis>> getPort() {
-        return ResponseEntity.ok(siparisRepository.findById(10l));
+        return ResponseEntity.ok(siparisRepository.findById(2l));
     }
 
 }

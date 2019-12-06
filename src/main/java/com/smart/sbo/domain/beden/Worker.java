@@ -17,8 +17,8 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.rest.core.annotation.RestResource;
 
-@Entity
 @Table(name = "worker", schema = "postgres")
+@Entity
 public class Worker extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
@@ -72,7 +72,5 @@ public class Worker extends BaseEntity {
     public void setSiparis(Siparis siparis) {
         this.siparis = siparis;
     }
-
-    
 
 }
