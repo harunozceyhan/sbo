@@ -2,7 +2,6 @@ server:
     port: 8083
 spring:
     application:
-        id: sbo-service
         name: sbo-service  
     cloud:
         consul:
@@ -39,3 +38,7 @@ spring:
         schemas: postgres
         user: postgres
         password: 1234
+    mvc:
+        throw-exception-if-no-handler-found: true
+    resources:
+        add-mappings: false

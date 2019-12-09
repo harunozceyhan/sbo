@@ -5,6 +5,7 @@ import org.hibernate.exception.DataException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.data.rest.core.RepositoryConstraintViolationException;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -126,6 +127,13 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return buildResponseEntity(apiError);
     }
 
+    @ExceptionHandler(ResourceNotFoundException.class)
+    protected ResponseEntity<Object> handleResourceNotFound(ResourceNotFoundException ex, WebRequest request) {
+        ApiError apiError = new ApiError(NOT_FOUND);
+        apiError.setMessage(ex.getMessage());
+        apiError.setDebugMessage(request.getDescription(false));
+        return buildResponseEntity(apiError);
+    }
     /**
      * Handle HttpMessageNotReadableException. Happens when request JSON is malformed.
      *
