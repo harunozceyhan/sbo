@@ -2,7 +2,6 @@ server:
     port: 8085
 spring:
     application:
-        id: sbo-service
         name: sbo-service  
     cloud:
         consul:
