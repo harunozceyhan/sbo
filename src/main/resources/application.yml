@@ -43,5 +43,4 @@ spring:
     resources:
         add-mappings: false
 security:
-    signing-key: secret
-
+    signing-key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlUMoDV162B3DcvWIcsF5o5O/9Gm0wxmLlld6Bv7U3BtBzO1bYvKDRwfvh//stUWSWdd6TP1eEl6KAYs1VogElKjPoWA2Sv8cR1Tuqyd2yKORC8ZjvmAPmasIkxdgV9YwE24qWS+MO04m3CEHFkk4Qf+aQq+ZJ7FfkxcnaP+LTTavcAvxFxtqsrWafrNO3pnnoAPbaZXiGxKvvgH8mTskiLtqjyFR24aklImA+wL9t8XPRcOaQWj+FElVqmEjRFpvtHlzkDlLEmMf44ES7p1xaqqOkE0UHp+13MHL9EYsfwPkNryC0VEx5k73PsouLjvwYcedJ5eqfLjftMwStcegcwIDAQAB
