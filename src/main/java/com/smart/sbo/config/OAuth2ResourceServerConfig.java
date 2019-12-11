@@ -10,7 +10,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 @EnableWebSecurity
 public class OAuth2ResourceServerConfig extends WebSecurityConfigurerAdapter {
 
-    @Value("${security.signing-key}")
+    @Value("${security.signing.key}")
     private String signingKey;
 
 	@Override
