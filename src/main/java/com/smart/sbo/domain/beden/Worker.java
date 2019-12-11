@@ -25,7 +25,7 @@ public class Worker extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_worker")
-    @SequenceGenerator(name = "seq_worker", sequenceName = "seq_worker", allocationSize = 1, initialValue=1)
+    @SequenceGenerator(name = "seq_worker", sequenceName = "postgres.seq_worker", allocationSize = 1, initialValue=1)
     private Long id;
 
     @NotNull

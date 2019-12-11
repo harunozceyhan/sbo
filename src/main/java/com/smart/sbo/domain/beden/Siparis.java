@@ -25,7 +25,7 @@ public class Siparis extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_siparis")
-    @SequenceGenerator(name = "seq_siparis", sequenceName = "seq_siparis", allocationSize = 1,initialValue=1)
+    @SequenceGenerator(name = "seq_siparis", sequenceName = "postgres.seq_siparis", allocationSize = 1,initialValue=1)
     private Long id;
 
     @NotNull

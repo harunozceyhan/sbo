@@ -19,7 +19,7 @@ public class Operation extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_operation")
-    @SequenceGenerator(name = "seq_operation", sequenceName = "seq_operation", allocationSize = 1,initialValue=1)
+    @SequenceGenerator(name = "seq_operation", sequenceName = "postgres.seq_operation", allocationSize = 1,initialValue=1)
     private Long id;
 
     @NotNull
