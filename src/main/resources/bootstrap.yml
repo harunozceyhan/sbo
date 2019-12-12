@@ -1,16 +1,6 @@
 spring:
     application.name: sbo-service
-    cloud:
-        consul:
-            enabled: true
-            host: localhost
-            port: 8500
-            discovery.acl-token: fcf8f0c8-2cb3-873f-43e5-b86618f8b8e1
-            config:
-                acl-token: fcf8f0c8-2cb3-873f-43e5-b86618f8b8e1
-                enabled: true
     jpa:
-        hibernate.ddl-auto: update
         properties:
             hibernate: 
                 dialect: org.hibernate.dialect.PostgreSQLDialect
@@ -18,3 +8,5 @@ spring:
     datasource.continue-on-error: false
     mvc.throw-exception-if-no-handler-found: true
     resources.add-mappings: false
+    profiles:
+        active: test

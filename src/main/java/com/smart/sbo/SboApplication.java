@@ -16,7 +16,6 @@ public class SboApplication {
 
 }
 
-
 @Configuration
 class RestTemplateConfig {
 	@Bean
