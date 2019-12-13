@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Optional;
+import java.util.UUID;
+
 import com.smart.sbo.domain.beden.Siparis;
 import com.smart.sbo.repository.SiparisRepository;
 
@@ -19,7 +21,7 @@ public class SiparisController {
 
     @GetMapping("/getport")
     public ResponseEntity<Optional<Siparis>> getPort() {
-        return ResponseEntity.ok(siparisRepository.findById(2l));
+        return ResponseEntity.ok(siparisRepository.findById(UUID.fromString("name")));
     }
 
 }
