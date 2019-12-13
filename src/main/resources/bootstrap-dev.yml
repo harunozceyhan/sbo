@@ -4,9 +4,8 @@ spring:
             enabled: true
             host: localhost
             port: 8500
-            discovery.acl-token: ad36b34c-8c99-6a3a-c374-c15312f19a1e
-            config:
+            discovery:
                 acl-token: ad36b34c-8c99-6a3a-c374-c15312f19a1e
+            config:
                 enabled: true
-    jpa:
-        hibernate.ddl-auto: update
+    jpa.hibernate.ddl-auto: update
