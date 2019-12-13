@@ -21,6 +21,6 @@ class RestTemplateConfig {
 	@Bean
 	@LoadBalanced		// Load balance between service instances running at different ports.
 	public RestTemplate restTemplate() {
-	    return new RestTemplate();
+		return new RestTemplate();
 	}
 }

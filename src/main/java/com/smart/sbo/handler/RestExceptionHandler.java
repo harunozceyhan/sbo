@@ -195,7 +195,7 @@ public class RestExceptionHandler  {
      */
     @ExceptionHandler(NoHandlerFoundException.class)
     protected ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException ex, WebRequest request) {
-        ApiError apiError = new ApiError(BAD_REQUEST);
+        ApiError apiError = new ApiError(NOT_FOUND);
         apiError.setMessage(String.format("Could not find the %s method for URL %s", ex.getHttpMethod(), ex.getRequestURL()));
         apiError.setDebugMessage(ex.getMessage());
         return buildResponseEntity(apiError);
