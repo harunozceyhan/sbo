@@ -8,4 +8,5 @@ spring:
                 acl-token: ad36b34c-8c99-6a3a-c374-c15312f19a1e
             config:
                 enabled: true
+                acl-token: ad36b34c-8c99-6a3a-c374-c15312f19a1e
     jpa.hibernate.ddl-auto: update

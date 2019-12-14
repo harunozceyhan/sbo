@@ -15,9 +15,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.smart.sbo.common.CommonLibrary;
+import com.smart.sbo.domain.beden.Operation;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -29,20 +30,39 @@ public class SiparisControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    public void all() throws Exception {
-        String data = "{\"adi\":\"Sipariş 1\",\"kodu\":\"S1\",\"operation\":{\"id\":\"fec9d7ec-681e-42f6-916f-ef57b36498ec\"}}";
-        this.mockMvc.perform(get("/siparis")).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
-        JsonObject responseJson = JsonParser.parseString(this.mockMvc.perform(post("/siparis").content(data).accept(MediaType.ALL)).andExpect(status().isCreated()).andReturn().getResponse().getContentAsString()).getAsJsonObject();
-        this.mockMvc.perform(delete("/siparis/" + responseJson.get("id").getAsString())).andExpect(status().isNoContent());
+    public void testSiparisEndpoint() throws Exception {
+        String operationId = addOperation();
+        getOperation();
+        String siparisId = addSiparis(operationId);
+        getSiparis();
+        deleteSiparis(siparisId);
+        deleteOperation(operationId);
     }
 
-    public static String asJsonString(final Object obj) {
-        try {
-            final ObjectMapper mapper = new ObjectMapper();
-            final String jsonContent = mapper.writeValueAsString(obj);
-            return jsonContent;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    public String addOperation() throws Exception {
+        JsonObject responseJson = JsonParser.parseString(this.mockMvc.perform(post("/operations").content(CommonLibrary.asJsonString(new Operation("Operation 1", "O1"))).accept(MediaType.ALL)).andExpect(status().isCreated()).andReturn().getResponse().getContentAsString()).getAsJsonObject();
+        return responseJson.get("id").getAsString();
+    }
+
+    public String addSiparis(String operationId) throws Exception {
+        String siparisData = "{\"adi\":\"Sipariş 1\",\"kodu\":\"S1\",\"operation\":{\"id\":\"" + operationId + "\"}}";
+        JsonObject responseJson = JsonParser.parseString(this.mockMvc.perform(post("/siparis").content(siparisData).accept(MediaType.ALL)).andExpect(status().isCreated()).andReturn().getResponse().getContentAsString()).getAsJsonObject();
+        return responseJson.get("id").getAsString();
+    }
+
+    public void getSiparis() throws Exception {
+        this.mockMvc.perform(get("/siparis")).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+    }
+
+    public void getOperation() throws Exception {
+        this.mockMvc.perform(get("/operations")).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+    }
+
+    public void deleteOperation(String id) throws Exception {
+        this.mockMvc.perform(delete("/operations/" + id)).andExpect(status().isNoContent());
+    }
+
+    public void deleteSiparis(String id) throws Exception {
+        this.mockMvc.perform(delete("/siparis/" + id)).andExpect(status().isNoContent());
     }
 }
