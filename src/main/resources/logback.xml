@@ -16,7 +16,8 @@
         <appender-ref ref="Console" />
     </logger>
 
-    <appender name="json" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="json" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>localhost:9600</destination>
         <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
     </appender>
     

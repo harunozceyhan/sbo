@@ -42,7 +42,7 @@ public class Siparis extends BaseEntity {
     @ManyToOne
     @RestResource(exported = false)
     @JoinColumn(name = "operation_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Operation operation;
 
     @JsonIgnore
