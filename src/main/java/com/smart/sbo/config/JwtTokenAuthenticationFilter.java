@@ -52,7 +52,7 @@ public class JwtTokenAuthenticationFilter extends  OncePerRequestFilter {
 				X509EncodedKeySpec keySpecX509 = new X509EncodedKeySpec(Base64.decodeBase64(signingKey));
 				RSAPublicKey pubKey = (RSAPublicKey) kf.generatePublic(keySpecX509);
 				DecodedJWT decodedJWT = JWT.require(Algorithm.RSA256(pubKey, null)).build().verify(token.replace("Bearer ", ""));
-				String user = decodedJWT.getSubject();
+				String user = decodedJWT.getClaim("preferred_username").asString();
 				// ((ArrayList)decodedJWT.getClaim("realm_access").asMap().get("roles")).get(0)
 				if (user != null) {
 					return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());

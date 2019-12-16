@@ -184,6 +184,12 @@ public class RestExceptionHandler  {
         return buildResponseEntity(new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, error, ex));
     }
 
+    @ExceptionHandler(Exception.class)
+    protected ResponseEntity<Object> handleOtherException(Exception ex, WebRequest request) {
+        String error = "Unexcepted Exception";
+        return buildResponseEntity(new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, error, ex));
+    }
+
     /**
      * Handle NoHandlerFoundException.
      *
