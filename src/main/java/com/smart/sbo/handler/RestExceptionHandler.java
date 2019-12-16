@@ -4,6 +4,7 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.hibernate.exception.DataException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.rest.core.RepositoryConstraintViolationException;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -19,12 +20,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
-
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
-
 import javax.persistence.EntityNotFoundException;
-
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.smart.sbo.error.ApiError;
 
@@ -67,7 +65,7 @@ public class RestExceptionHandler  {
         return buildResponseEntity(new ApiError(HttpStatus.UNSUPPORTED_MEDIA_TYPE, builder.substring(0, builder.length() - 2), ex));
     }
 
-     /**
+    /**
      * Handle HttpRequestMethodNotSupportedException. This one triggers when JSON is invalid as well.
      *
      * @param ex      HttpMediaTypeNotSupportedException
@@ -115,6 +113,22 @@ public class RestExceptionHandler  {
         ApiError apiError = new ApiError(BAD_REQUEST);
         apiError.setMessage("Validation error");
         apiError.addValidationErrors(ex.getErrors().getFieldErrors());
+        return buildResponseEntity(apiError);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<Object> handleBadRequest(DataIntegrityViolationException ex, WebRequest request) {
+        ApiError apiError = new ApiError(BAD_REQUEST);
+        apiError.setMessage("Constraint Viaolation Error");
+        apiError.setDebugMessage(ex.getMessage());
+        return buildResponseEntity(apiError);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<Object> handleBadRequest(ConstraintViolationException ex, WebRequest request) {
+        ApiError apiError = new ApiError(BAD_REQUEST);
+        apiError.setMessage("Constraint Viaolation Error");
+        apiError.setDebugMessage(ex.getMessage());
         return buildResponseEntity(apiError);
     }
 
@@ -221,17 +235,6 @@ public class RestExceptionHandler  {
         ApiError apiError = new ApiError(BAD_REQUEST);
         apiError.setMessage(ex.getMessage());
         return buildResponseEntity(apiError);
-    }
-
-    /**
-     * Handle ConstraintViolationException, inspects the cause for different DB causes.
-     *
-     * @param ex the ConstraintViolationException
-     * @return the ApiError object
-     */
-    @ExceptionHandler(ConstraintViolationException.class)
-    protected ResponseEntity<Object> handleDataIntegrityViolation(ConstraintViolationException ex, WebRequest request) {
-        return buildResponseEntity(new ApiError(HttpStatus.CONFLICT, "Database error", ex.getCause()));
     }
 
     /**

@@ -31,11 +31,12 @@ public class CustomHibernateInterceptor extends EmptyInterceptor {
     }
 
     @Override
+    @SuppressWarnings("rawtypes")
     public void postFlush(Iterator entities) {
         super.postFlush(entities);
         while (entities.hasNext()) {
+            Object entityObj = entities.next();
             if (crudtype.equals("INSERT") || crudtype.equals("UPDATE")) {
-                Object entityObj = entities.next();
                 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
                 LOGGER.info("", kv("type", crudtype), kv("entity", entityObj), kv("className", entityObj.getClass().toString()), kv("id", BaseEntity.class.cast(entityObj).getId().toString()), kv("user", authentication == null ? "" : authentication.getName()));
             }
