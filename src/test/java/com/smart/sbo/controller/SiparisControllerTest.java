@@ -33,10 +33,11 @@ public class SiparisControllerTest {
     public void testSiparisEndpoint() throws Exception {
         String operationId = addOperation();
         getOperation();
-        String siparisId = addSiparis(operationId);
+        // String siparisId = 
+        addSiparis(operationId);
         getSiparis();
-        deleteSiparis(siparisId);
         deleteOperation(operationId);
+        //deleteSiparis(siparisId);
     }
 
     public String addOperation() throws Exception {

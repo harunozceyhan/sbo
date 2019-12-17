@@ -16,14 +16,15 @@
         <appender-ref ref="Console" />
     </logger>
 
-    <appender name="json" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <destination>localhost:5000</destination>
-        <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+    <appender name="async" class="net.logstash.logback.appender.LoggingEventAsyncDisruptorAppender">
+        <appender name="json" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+            <destination>localhost:5000</destination>
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+        </appender>
     </appender>
-    
-    <logger name="jsonLogger" level="TRACE">
-        <appender-ref ref="json" />
+
+    <logger name="jsonLogger" level="INFO">
+        <appender-ref ref="async" />
     </logger>
-
-
+    
 </configuration>
