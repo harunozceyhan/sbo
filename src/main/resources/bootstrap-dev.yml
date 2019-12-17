@@ -6,6 +6,7 @@ spring:
             port: 8500
             discovery:
                 acl-token: ad36b34c-8c99-6a3a-c374-c15312f19a1e
+                healthCheckPath: /api/v1/actuator/health
             config:
                 enabled: true
                 acl-token: ad36b34c-8c99-6a3a-c374-c15312f19a1e
