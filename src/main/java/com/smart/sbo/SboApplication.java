@@ -1,6 +1,7 @@
 package com.smart.sbo;
 
 import com.smart.config.ResourceSecurityConfigurer;
+import com.smart.handler.SmartExceptionHandler;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration;
@@ -14,7 +15,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-@Import({ ResourceSecurityConfigurer.class })
+@Import({ ResourceSecurityConfigurer.class, SmartExceptionHandler.class })
 @EnableAutoConfiguration(exclude = { SecurityAutoConfiguration.class, ManagementWebSecurityAutoConfiguration.class })
 public class SboApplication {
 
