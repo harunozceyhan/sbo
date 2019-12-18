@@ -10,8 +10,7 @@ import lombok.AllArgsConstructor;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
 import javax.validation.constraints.NotNull;
-import com.smart.sbo.domain.base.BaseEntity;
-
+import com.smart.model.base.BaseEntity;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.rest.core.annotation.RestResource;

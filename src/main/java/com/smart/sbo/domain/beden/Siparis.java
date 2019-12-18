@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.CascadeType;
 import javax.validation.constraints.NotNull;
-import com.smart.sbo.domain.base.BaseEntity;
+import com.smart.model.base.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import org.hibernate.annotations.OnDelete;

@@ -1,8 +1,10 @@
 package com.smart.sbo;
 
+import com.smart.config.CustomHibernateInterceptor;
+import com.smart.config.JpaAuditingConfiguration;
 import com.smart.config.ResourceSecurityConfigurer;
+import com.smart.config.RestConfiguration;
 import com.smart.handler.SmartExceptionHandler;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -15,7 +17,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-@Import({ ResourceSecurityConfigurer.class, SmartExceptionHandler.class })
+@Import({ ResourceSecurityConfigurer.class, SmartExceptionHandler.class, CustomHibernateInterceptor.class, JpaAuditingConfiguration.class, RestConfiguration.class })
 @EnableAutoConfiguration(exclude = { SecurityAutoConfiguration.class, ManagementWebSecurityAutoConfiguration.class })
 public class SboApplication {
 
