@@ -1,7 +1,8 @@
 package com.smart.sbo;
 
-import com.smart.config.SmartHibernateInterceptor;
+import com.smart.config.SmartHibernateInterceptorRegisterer;
 import com.smart.controller.SecurityErrorController;
+import com.smart.config.ApplicationProperties;
 import com.smart.config.JpaAuditingConfiguration;
 import com.smart.config.ResourceSecurityConfigurer;
 import com.smart.config.RestConfiguration;
@@ -13,13 +14,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-@Import({ ResourceSecurityConfigurer.class, SmartExceptionHandler.class, SmartHibernateInterceptor.class, JpaAuditingConfiguration.class, RestConfiguration.class, SecurityErrorController.class })
+@ComponentScan("com.smart")
 @EnableAutoConfiguration(exclude = { SecurityAutoConfiguration.class, ManagementWebSecurityAutoConfiguration.class })
+@Import({ ApplicationProperties.class, ResourceSecurityConfigurer.class, SmartExceptionHandler.class, SmartHibernateInterceptorRegisterer.class, JpaAuditingConfiguration.class, RestConfiguration.class, SecurityErrorController.class })
 public class SboApplication {
 
 	public static void main(String[] args) {

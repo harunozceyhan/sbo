@@ -3,8 +3,6 @@ spring:
     jpa:
         properties:
             hibernate: 
-                ejb:
-                    interceptor: com.smart.config.SmartHibernateInterceptor
                 dialect: org.hibernate.dialect.PostgreSQLDialect
                 jdbc.lob.non_contextual_creation: true
     mvc.throw-exception-if-no-handler-found: true
