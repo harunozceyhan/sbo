@@ -25,7 +25,7 @@ public class CardController {
     @Autowired
     private CardService cardService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public Page<Card> getCars(Pageable pageable) {
         return cardService.getCards(pageable);
     }

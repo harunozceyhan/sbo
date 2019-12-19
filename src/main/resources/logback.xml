@@ -23,7 +23,11 @@
         </appender>
     </appender>
 
-    <logger name="jsonLogger" level="INFO">
+    <logger name="infoLogger" level="INFO">
+        <appender-ref ref="async" />
+    </logger>
+
+    <logger name="errorLogger" level="ERROR">
         <appender-ref ref="async" />
     </logger>
     
