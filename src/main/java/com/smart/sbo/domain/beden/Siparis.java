@@ -18,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 
@@ -33,12 +34,15 @@ public class Siparis extends BaseEntity {
 
     @NotNull
     @Column(nullable=false, length=40)
+    @Length(min = 1, max = 40)
     private String adi;
 
     @NotNull
     @Column(nullable=false, length=10)
+    @Length(min = 1, max = 10)
     private String kodu;
 
+    @NotNull
     @ManyToOne
     @RestResource(exported = false)
     @JoinColumn(name = "operation_id", nullable = false)
