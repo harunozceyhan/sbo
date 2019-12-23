@@ -21,7 +21,7 @@ public class SiparisController {
 
     @GetMapping("/getport")
     public ResponseEntity<Optional<Siparis>> getPort() {
-        return ResponseEntity.ok(siparisRepository.findById(UUID.fromString("name")));
+        return ResponseEntity.ok(siparisRepository.findById(UUID.fromString("96483455-3562-49fb-874b-52673f76a1f1")));
     }
 
 }

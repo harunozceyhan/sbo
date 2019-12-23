@@ -10,6 +10,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.smart.model.base.BaseEntity;
+
+import org.hibernate.validator.constraints.Length;
+
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -31,10 +34,12 @@ public class Operation extends BaseEntity {
 
     @NotNull
     @Column(nullable=false, length=40)
+    @Length(min = 1, max = 40)
     private String adi;
 
     @NotNull
     @Column(nullable=false, length=10)
+    @Length(min = 1, max = 10)
     private String kodu;
 
     @JsonIgnore
