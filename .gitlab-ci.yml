@@ -1,0 +1,52 @@
+image: docker:latest
+services:
+    - docker:dind
+
+variables:
+    APP_NAME: "sbo"
+    REGISTRY_USER: "admin"
+    REGISTRY_PASSWORD: "ibsvo2983asd"
+
+stages:
+    - build
+    - package
+    - deploy
+
+build:
+    image: maven:3.6.3-jdk-11-slim
+    stage: build
+    script:
+        - 'mvn package -Dspring.config.location=classpath:application-stage.yml -B'
+    artifacts:
+        paths:
+            - target/*.jar
+    only:
+        - /^v.*$/
+    except:
+        - branches
+
+package:
+    stage: package
+    script:
+        - docker build -t nexus.smartiys.com:5000/$APP_NAME .
+        - docker login -u $REGISTRY_USER -p $REGISTRY_PASSWORD nexus.smartiys.com:5000
+        - docker push nexus.smartiys.com:5000/$APP_NAME
+    only:
+        - /^v.*$/
+    except:
+        - branches
+
+deploy_staging:
+    stage: deploy
+    script:
+        - apk upgrade && apk update
+        - apk add openssh-client
+        - apk add sshpass
+        - sshpass -p "MTsmart44" ssh -o StrictHostKeyChecking=no test@test.smartiys.com "docker ps -a | awk '{ print \$1,\$2 }' | grep $APP_NAME | awk '{print \$1 }' | xargs -I {} docker container stop {} && docker ps -a | awk '{ print \$1,\$2 }' | grep $APP_NAME | awk '{print \$1 }' | xargs -I {} docker rm -v {} && docker rmi nexus.smartiys.com:5000/$APP_NAME || true"
+        - sshpass -p "MTsmart44" ssh -o StrictHostKeyChecking=no test@test.smartiys.com docker login -u $REGISTRY_USER -p $REGISTRY_PASSWORD nexus.smartiys.com:5000
+        - sshpass -p "MTsmart44" ssh -o StrictHostKeyChecking=no test@test.smartiys.com docker pull nexus.smartiys.com:5000/$APP_NAME
+        - sshpass -p "MTsmart44" ssh -o StrictHostKeyChecking=no test@test.smartiys.com docker run --name $APP_NAME-$CI_COMMIT_TAG --network=dev-net --net-alias=$APP_NAME.smart -p 8081:8081 -d nexus.smartiys.com:5000/$APP_NAME
+    only:
+        - /^v.*$/
+    except:
+        - branches
