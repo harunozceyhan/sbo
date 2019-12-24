@@ -2,7 +2,7 @@ spring:
     cloud:
         consul:
             enabled: true
-            host: localhost
+            host: dev.smartiys.com
             port: 8500
             discovery:
                 acl-token: ad36b34c-8c99-6a3a-c374-c15312f19a1e
@@ -10,5 +10,5 @@ spring:
             config:
                 enabled: true
                 acl-token: ad36b34c-8c99-6a3a-c374-c15312f19a1e
-    flyway.enabled: true
+    flyway.enabled: false
     jpa.hibernate.ddl-auto: validate

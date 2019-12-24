@@ -17,7 +17,7 @@
 
         <appender name='async' class='net.logstash.logback.appender.LoggingEventAsyncDisruptorAppender'>
             <appender name='json' class='net.logstash.logback.appender.LogstashTcpSocketAppender'>
-                <destination>localhost:5000</destination>
+                <destination>dev.smartiys.com:5000</destination>
                 <encoder class='net.logstash.logback.encoder.LogstashEncoder' />
             </appender>
         </appender>
