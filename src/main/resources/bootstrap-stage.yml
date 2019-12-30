@@ -1,8 +1,9 @@
 spring:
+    application.name: sbo-service
     cloud:
         consul:
             enabled: true
-            host: test.smartiys.com
+            host: test.smartiys.io
             port: 8500
             discovery:
                 acl-token: ad36b34c-8c99-6a3a-c374-c15312f19a1e
@@ -10,5 +11,13 @@ spring:
             config:
                 enabled: true
                 acl-token: ad36b34c-8c99-6a3a-c374-c15312f19a1e
+    jpa:
+        properties:
+            hibernate: 
+                ddl-auto: validate
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+                jdbc.lob.non_contextual_creation: true
+    mvc.throw-exception-if-no-handler-found: true
+    resources.add-mappings: false
     flyway.enabled: true
-    jpa.hibernate.ddl-auto: validate
+    profiles.active: prod
