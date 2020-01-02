@@ -1,66 +1,66 @@
 {
-  "name": "sbo",
-  "version": "1.1.5",
-  "description": "",
-  "main": "index.js",
-  "dependencies": {},
-  "devDependencies": {
-    "@commitlint/cli": "^8.2.0",
-    "@commitlint/config-conventional": "^8.2.0",
-    "husky": "^3.1.0"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/harunozceyhan/sbo.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/harunozceyhan/sbo/issues"
-  },
-  "homepage": "https://github.com/harunozceyhan/sbo#readme",
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
-  "standard-version": {
-    "types": [
-      {
-        "type": "feat",
-        "hidden": true
-      },
-      {
-        "type": "fix",
-        "hidden": true
-      },
-      {
-        "type": "chore",
-        "hidden": true
-      },
-      {
-        "type": "docs",
-        "section": "Yenilikler"
-      },
-      {
-        "type": "style",
-        "hidden": true
-      },
-      {
-        "type": "refactor",
-        "hidden": true
-      },
-      {
-        "type": "perf",
-        "hidden": true
-      },
-      {
-        "type": "test",
-        "hidden": true
-      }
-    ]
-  }
+	"name": "sbo",
+	"version": "1.1.5",
+	"description": "",
+	"main": "index.js",
+	"dependencies": {},
+	"devDependencies": {
+		"@commitlint/cli": "^8.2.0",
+		"@commitlint/config-conventional": "^8.2.0",
+        "husky": "^3.1.0" 
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/harunozceyhan/sbo.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/harunozceyhan/sbo/issues"
+	},
+	"homepage": "https://github.com/harunozceyhan/sbo#readme",
+	"husky": {
+		"hooks": {
+			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+		}
+	},
+	"standard-version": {
+		"types": [
+			{
+				"type": "feat",
+				"hidden": true
+			},
+			{
+				"type": "fix",
+				"hidden": true
+			},
+			{
+				"type": "chore",
+				"hidden": true
+			},
+			{
+				"type": "docs",
+				"section": "Yenilikler"
+			},
+			{
+				"type": "style",
+				"hidden": true
+			},
+			{
+				"type": "refactor",
+				"hidden": true
+			},
+			{
+				"type": "perf",
+				"hidden": true
+			},
+			{
+				"type": "test",
+				"hidden": true
+			}
+		]
+	}
 }

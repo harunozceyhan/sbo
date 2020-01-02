@@ -97,7 +97,7 @@
         <repository>
             <id>nexus-repo</id>
             <name>Smart Nexus Repo</name>
-            <url>http://nexus.smartiys.com/repository/maven-releases/</url>
+            <url>http://nexus.smartiys.io/repository/maven-releases/</url>
         </repository>
     </repositories>
 

@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.JoinColumn;
 import javax.persistence.CascadeType;
 import com.smart.model.base.BaseEntity;
+import com.smart.sbo.annotation.Metadata;
+
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -25,18 +27,19 @@ import org.springframework.data.rest.core.annotation.RestResource;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper=true)
+@Metadata("worker")
+@EqualsAndHashCode(callSuper = true)
 @Table(name = "worker", schema = "postgres")
 public class Worker extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
     @NotNull
-    @Column(nullable=false, length=40)
+    @Column(nullable = false, length = 40)
     private String adi;
 
     @NotNull
-    @Column(nullable=false, length=10)
+    @Column(nullable = false, length = 10)
     private String kodu;
 
     @ManyToOne()
