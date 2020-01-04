@@ -33,21 +33,27 @@ public class SiparisControllerTest {
     public void testSiparisEndpoint() throws Exception {
         String operationId = addOperation();
         getOperation();
-        // String siparisId = 
+        // String siparisId =
         addSiparis(operationId);
         getSiparis();
         deleteOperation(operationId);
-        //deleteSiparis(siparisId);
+        // deleteSiparis(siparisId);
     }
 
     public String addOperation() throws Exception {
-        JsonObject responseJson = JsonParser.parseString(this.mockMvc.perform(post("/operations").content(CommonLibrary.asJsonString(new Operation("Operation 1", "O1"))).accept(MediaType.ALL)).andExpect(status().isCreated()).andReturn().getResponse().getContentAsString()).getAsJsonObject();
+        JsonObject responseJson = JsonParser.parseString(this.mockMvc
+                .perform(post("/operation").content(CommonLibrary.asJsonString(new Operation("Operation 1", "O1")))
+                        .accept(MediaType.ALL))
+                .andExpect(status().isCreated()).andReturn().getResponse().getContentAsString()).getAsJsonObject();
         return responseJson.get("id").getAsString();
     }
 
     public String addSiparis(String operationId) throws Exception {
         String siparisData = "{\"adi\":\"Sipariş 1\",\"kodu\":\"S1\",\"operation\":{\"id\":\"" + operationId + "\"}}";
-        JsonObject responseJson = JsonParser.parseString(this.mockMvc.perform(post("/siparis").content(siparisData).accept(MediaType.ALL)).andExpect(status().isCreated()).andReturn().getResponse().getContentAsString()).getAsJsonObject();
+        JsonObject responseJson = JsonParser
+                .parseString(this.mockMvc.perform(post("/siparis").content(siparisData).accept(MediaType.ALL))
+                        .andExpect(status().isCreated()).andReturn().getResponse().getContentAsString())
+                .getAsJsonObject();
         return responseJson.get("id").getAsString();
     }
 
@@ -56,11 +62,12 @@ public class SiparisControllerTest {
     }
 
     public void getOperation() throws Exception {
-        this.mockMvc.perform(get("/operations")).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        this.mockMvc.perform(get("/operation")).andExpect(status().isOk()).andReturn().getResponse()
+                .getContentAsString();
     }
 
     public void deleteOperation(String id) throws Exception {
-        this.mockMvc.perform(delete("/operations/" + id)).andExpect(status().isNoContent());
+        this.mockMvc.perform(delete("/operation/" + id)).andExpect(status().isNoContent());
     }
 
     public void deleteSiparis(String id) throws Exception {
