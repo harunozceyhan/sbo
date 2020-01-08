@@ -42,8 +42,9 @@ public class SiparisControllerTest {
 
     public String addOperation() throws Exception {
         JsonObject responseJson = JsonParser.parseString(this.mockMvc
-                .perform(post("/operation").content(CommonLibrary.asJsonString(new Operation("Operation 1", "O1")))
-                        .accept(MediaType.ALL))
+                .perform(
+                        post("/operation").content(CommonLibrary.asJsonString(new Operation("Operation 1", "O1", true)))
+                                .accept(MediaType.ALL))
                 .andExpect(status().isCreated()).andReturn().getResponse().getContentAsString()).getAsJsonObject();
         return responseJson.get("id").getAsString();
     }

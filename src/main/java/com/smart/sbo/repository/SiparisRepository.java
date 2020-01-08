@@ -16,4 +16,7 @@ public interface SiparisRepository extends JpaRepository<Siparis, UUID> {
     public Page<Siparis> findAllByAdiContainsIgnoreCaseAndKoduContainsIgnoreCaseAndOperation_AdiContainsIgnoreCase(
             @Param("adi") String adi, @Param("kodu") String kodu, @Param("operationAdi") String operationAdi,
             Pageable p);
+
+    @RestResource(path = "name")
+    public Page<Siparis> findAllByAdiContainsIgnoreCase(@Param("adi") String adi, Pageable p);
 }

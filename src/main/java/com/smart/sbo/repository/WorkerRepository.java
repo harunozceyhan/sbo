@@ -14,6 +14,9 @@ import org.springframework.data.rest.core.annotation.RestResource;
 @RepositoryRestResource(path = "worker")
 public interface WorkerRepository extends JpaRepository<Worker, UUID> {
     @RestResource(path = "worker")
-    public Page<Worker> findAllByAdiContainsAndKoduContains(@Param("adi") String adi, @Param("kodu") String kodu,
-            Pageable p);
+    public Page<Worker> findAllByAdiContainsIgnoreCaseAndKoduContainsIgnoreCase(@Param("adi") String adi,
+            @Param("kodu") String kodu, Pageable p);
+
+    @RestResource(path = "name")
+    public Page<Worker> findAllByAdiContainsIgnoreCase(@Param("adi") String adi, Pageable p);
 }

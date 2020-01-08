@@ -12,8 +12,10 @@ spring:
                 enabled: true
                 acl-token: ad36b34c-8c99-6a3a-c374-c15312f19a1e
     jpa:
+        hibernate:
+            ddl-auto: update
         properties:
-            hibernate: 
+            hibernate:
                 ddl-auto: update
                 dialect: org.hibernate.dialect.PostgreSQLDialect
                 jdbc.lob.non_contextual_creation: true

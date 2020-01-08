@@ -11,12 +11,10 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.smart.model.base.BaseEntity;
 import com.smart.sbo.annotation.Metadata;
-
-import org.hibernate.validator.constraints.Length;
-
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 @Data
 @Entity
@@ -29,9 +27,10 @@ public class Operation extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    public Operation(String adi, String kodu) {
+    public Operation(String adi, String kodu, Boolean active) {
         this.adi = adi;
         this.kodu = kodu;
+        this.active = active;
     }
 
     @NotNull
@@ -43,6 +42,10 @@ public class Operation extends BaseEntity {
     @Column(nullable = false, length = 10)
     @Length(min = 1, max = 10)
     private String kodu;
+
+    @NotNull
+    @Column(columnDefinition = "boolean default true", nullable = false)
+    private Boolean active;
 
     @JsonIgnore
     @OneToMany(mappedBy = "operation", cascade = CascadeType.ALL)
