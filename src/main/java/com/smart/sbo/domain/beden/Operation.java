@@ -1,6 +1,10 @@
 package com.smart.sbo.domain.beden;
 
 import lombok.Data;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -8,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.smart.model.base.BaseEntity;
 import com.smart.sbo.annotation.Metadata;
@@ -42,6 +48,10 @@ public class Operation extends BaseEntity {
     @Column(nullable = false, length = 10)
     @Length(min = 1, max = 10)
     private String kodu;
+
+    @JsonFormat(pattern = "dd-MM-yyyy", timezone = "Asia/Istanbul")
+    @Temporal(TemporalType.DATE)
+    Date operationDate;
 
     @NotNull
     @Column(columnDefinition = "boolean default true", nullable = false)

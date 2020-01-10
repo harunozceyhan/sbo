@@ -2,8 +2,11 @@ package com.smart.sbo.domain.beden;
 
 import lombok.Data;
 
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import lombok.NoArgsConstructor;
@@ -17,6 +20,8 @@ import com.smart.model.base.BaseEntity;
 import com.smart.sbo.annotation.Metadata;
 
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import org.hibernate.annotations.OnDelete;
@@ -41,6 +46,12 @@ public class Worker extends BaseEntity {
     @NotNull
     @Column(nullable = false, length = 10)
     private String kodu;
+
+    @NotNull
+    @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "dd-MM-yyyy", timezone = "Asia/Istanbul")
+    Date workDate;
 
     @ManyToOne()
     @RestResource(exported = false)
