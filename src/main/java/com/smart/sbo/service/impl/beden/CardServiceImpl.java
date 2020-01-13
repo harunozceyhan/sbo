@@ -28,7 +28,8 @@ public class CardServiceImpl implements CardService {
     }
 
     public Card getCard(UUID id) {
-        return cardRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Couldn't found card: " + id.toString()));
+        return cardRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Couldn't found card: " + id.toString()));
     }
 
     public Card createCard(Card card) {
@@ -36,20 +37,18 @@ public class CardServiceImpl implements CardService {
     }
 
     public Card updateCard(UUID id, Card card) {
-        return cardRepository.findById(id)
-                .map(cardObj -> {
-                    cardObj.setAdi(card.getAdi());
-                    cardObj.setKodu(card.getKodu());
-                    cardObj.setWorker(card.getWorker());
-                    return cardRepository.save(cardObj);
-                }).orElseThrow(() -> new ResourceNotFoundException("Couldn't found card: " + id.toString()));
+        return cardRepository.findById(id).map(cardObj -> {
+            cardObj.setAdi(card.getAdi());
+            cardObj.setKodu(card.getKodu());
+            cardObj.setWorker(card.getWorker());
+            return cardRepository.save(cardObj);
+        }).orElseThrow(() -> new ResourceNotFoundException("Couldn't found card: " + id.toString()));
     }
 
     public ResponseEntity<?> deleteCard(UUID id) {
-        return cardRepository.findById(id)
-                .map(card -> {
-                    cardRepository.delete(card);
-                    return ResponseEntity.noContent().build();
-                }).orElseThrow(() -> new ResourceNotFoundException("Card not found with id: " + id.toString()));
+        return cardRepository.findById(id).map(card -> {
+            cardRepository.delete(card);
+            return ResponseEntity.noContent().build();
+        }).orElseThrow(() -> new ResourceNotFoundException("Card not found with id: " + id.toString()));
     }
-} 
+}
