@@ -9,4 +9,14 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface Metadata {
     String value() default "";
+
+    String title() default "";
+
+    String detailTitleKey() default "";
+
+    String baseUrl() default "";
+
+    String getUrl() default "";
+
+    String responseKey() default "";
 }

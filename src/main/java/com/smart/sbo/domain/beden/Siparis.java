@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.CascadeType;
 import javax.validation.constraints.NotNull;
 import com.smart.model.base.BaseEntity;
+import com.smart.sbo.annotation.MetaColumn;
 import com.smart.sbo.annotation.Metadata;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -32,9 +33,9 @@ import org.springframework.data.rest.core.annotation.RestResource;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Metadata("siparis")
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "siparis", schema = "postgres")
+@Metadata(value = "siparis", title = "siparisList", detailTitleKey = "adi", baseUrl = "siparis", getUrl = "siparis/search/siparis", responseKey = "siparises")
 public class Siparis extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
@@ -42,17 +43,20 @@ public class Siparis extends BaseEntity {
     @NotNull
     @Column(nullable = false, length = 40)
     @Length(min = 1, max = 40)
+    @MetaColumn(sortable = true, searchable = true, showInTable = true, width = 35)
     private String adi;
 
     @NotNull
     @Column(nullable = false, length = 10)
     @Length(min = 1, max = 10)
+    @MetaColumn(sortable = true, searchable = true, showInTable = true, width = 35)
     private String kodu;
 
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss", timezone = "Asia/Istanbul")
+    @MetaColumn(sortable = true, searchable = true, showInTable = true, width = 35)
     Date orderDate;
 
     @NotNull
@@ -60,6 +64,7 @@ public class Siparis extends BaseEntity {
     @RestResource(exported = false)
     @JoinColumn(name = "operation_id", nullable = false)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @MetaColumn(sortable = true, searchable = true, showInTable = true, width = 35, formType = "autocomplete", tableValue = "operation.adi", searchKey = "operationAdi")
     private Operation operation;
 
     @JsonIgnore

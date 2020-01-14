@@ -16,6 +16,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.smart.model.base.BaseEntity;
+import com.smart.sbo.annotation.MetaColumn;
 import com.smart.sbo.annotation.Metadata;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -26,9 +27,9 @@ import org.hibernate.validator.constraints.Length;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Metadata("operation")
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "operation", schema = "postgres")
+@Metadata(value = "operation", title = "operationList", detailTitleKey = "adi", baseUrl = "operation", getUrl = "operation/operation", responseKey = "operations")
 public class Operation extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
@@ -42,19 +43,23 @@ public class Operation extends BaseEntity {
     @NotNull
     @Column(nullable = false, length = 40)
     @Length(min = 1, max = 40)
+    @MetaColumn(sortable = true, searchable = true, showInTable = true, width = 35)
     private String adi;
 
     @NotNull
     @Column(nullable = false, length = 10)
     @Length(min = 1, max = 10)
+    @MetaColumn(sortable = true, searchable = true, showInTable = true, width = 35)
     private String kodu;
 
     @JsonFormat(pattern = "dd-MM-yyyy", timezone = "Asia/Istanbul")
     @Temporal(TemporalType.DATE)
+    @MetaColumn(sortable = true, searchable = true, showInTable = true, width = 35)
     Date operationDate;
 
     @NotNull
     @Column(columnDefinition = "boolean default true", nullable = false)
+    @MetaColumn(sortable = true, searchable = true, showInTable = true, width = 35)
     private Boolean active;
 
     @JsonIgnore

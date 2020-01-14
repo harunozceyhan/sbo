@@ -1,14 +1,21 @@
 package com.smart.sbo.controller;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import javax.persistence.EntityManager;
 import javax.persistence.metamodel.EntityType;
 
+import com.smart.sbo.annotation.MetaColumn;
 import com.smart.sbo.annotation.Metadata;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,18 +29,62 @@ public class MetaDataController {
     EntityManager entityManager;
 
     @GetMapping("/{name}")
-    public String metadataName(@PathVariable String name) {
-        String fields = "";
+    public ResponseEntity<Object> metadataName(@PathVariable String name) {
+        Map<String, Object> responseMap = new HashMap<String, Object>();
+        List<Map<String, Object>> columnList = new ArrayList<>();
         EntityType<?> entityType = entityManager.getMetamodel().getEntities().stream()
                 .filter(entity -> entity.getJavaType().isAnnotationPresent(Metadata.class)
                         && entity.getJavaType().getAnnotation(Metadata.class).value().equals(name))
                 .findFirst().orElse(null);
         if (entityType != null) {
             // Class clazz = entityType.getJavaType();
-            fields = Stream.of(entityType.getJavaType().getDeclaredFields()).map(Field::getName)
-                    .collect(Collectors.joining(", "));
+            Metadata classMetadata = entityType.getJavaType().getAnnotation(Metadata.class);
+            responseMap.put("title", classMetadata.title());
+            responseMap.put("detailTitleKey", classMetadata.detailTitleKey());
+            responseMap.put("baseUrl", classMetadata.baseUrl());
+            responseMap.put("getUrl", classMetadata.getUrl());
+            responseMap.put("responseKey", classMetadata.responseKey());
+
+            List<Field> fieldList = Arrays.asList(entityType.getJavaType().getDeclaredFields()).stream()
+                    .filter(field -> field.isAnnotationPresent(MetaColumn.class)).collect(Collectors.toList());
+            fieldList.forEach(field -> {
+                Map<String, Object> columnsMap = new HashMap<String, Object>();
+                MetaColumn fieldMeta = field.getAnnotation(MetaColumn.class);
+                String fieldType = field.getType().getSimpleName();
+                if (fieldType.equals("String")) {
+                    columnsMap.put("type", fieldMeta.type().equals("") ? "text" : fieldMeta.type());
+                    columnsMap.put("formType", fieldMeta.formType().equals("") ? "text" : fieldMeta.formType());
+
+                } else if (fieldType.equals("Date")) {
+                    columnsMap.put("type", fieldMeta.type().equals("") ? "text" : fieldMeta.type());
+                    columnsMap.put("formType", fieldMeta.formType().equals("") ? "datepicker" : fieldMeta.formType());
+
+                } else if (fieldType.equals("Boolean")) {
+                    columnsMap.put("type", fieldMeta.type().equals("") ? "boolean" : fieldMeta.type());
+                    columnsMap.put("formType", fieldMeta.formType().equals("") ? "checkbox" : fieldMeta.formType());
+
+                } else if (fieldType.equals("Integer") || fieldType.equals("Double") || fieldType.equals("Float")) {
+                    columnsMap.put("type", fieldMeta.type().equals("") ? "number" : fieldMeta.type());
+                    columnsMap.put("formType", fieldMeta.formType().equals("") ? "text" : fieldMeta.formType());
+
+                } else { // Object
+                    columnsMap.put("type", fieldMeta.type().equals("") ? "object" : fieldMeta.type());
+                    columnsMap.put("formType", fieldMeta.formType().equals("") ? "combobox" : fieldMeta.formType());
+
+                }
+
+                columnsMap.put("text", fieldMeta.text().equals("") ? field.getName() : fieldMeta.text());
+                columnsMap.put("value", fieldMeta.value().equals("") ? field.getName() : fieldMeta.value());
+                columnsMap.put("tableValue",
+                        fieldMeta.tableValue().equals("") ? field.getName() : fieldMeta.tableValue());
+                columnsMap.put("searchKey", fieldMeta.searchKey().equals("") ? field.getName() : fieldMeta.searchKey());
+                columnList.add(columnsMap);
+            });
+            responseMap.put("columns", columnList);
+        } else {
+            throw new ResourceNotFoundException("MetaData Not Found");
         }
 
-        return fields;
+        return ResponseEntity.ok(responseMap);
     }
 }
