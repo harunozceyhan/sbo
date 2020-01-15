@@ -43,20 +43,20 @@ public class Siparis extends BaseEntity {
     @NotNull
     @Column(nullable = false, length = 40)
     @Length(min = 1, max = 40)
-    @MetaColumn(sortable = true, searchable = true, showInTable = true, width = 35)
+    @MetaColumn(sortable = true, searchable = true, showInTable = true, width = 30)
     private String adi;
 
     @NotNull
     @Column(nullable = false, length = 10)
     @Length(min = 1, max = 10)
-    @MetaColumn(sortable = true, searchable = true, showInTable = true, width = 35)
+    @MetaColumn(sortable = true, searchable = true, showInTable = true, width = 15)
     private String kodu;
 
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss", timezone = "Asia/Istanbul")
-    @MetaColumn(sortable = true, searchable = true, showInTable = true, width = 35)
+    @MetaColumn(sortable = true, searchable = false, showInTable = true, width = 20, formType = "datetimepicker")
     Date orderDate;
 
     @NotNull
@@ -64,7 +64,7 @@ public class Siparis extends BaseEntity {
     @RestResource(exported = false)
     @JoinColumn(name = "operation_id", nullable = false)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
-    @MetaColumn(sortable = true, searchable = true, showInTable = true, width = 35, formType = "autocomplete", tableValue = "operation.adi", searchKey = "operationAdi")
+    @MetaColumn(sortable = true, searchable = true, showInTable = true, width = 30, formType = "autocomplete", url = "operation/search/name", responseKey = "operations", itemText = "adi", tableValue = "operation.adi", searchKey = "operationAdi")
     private Operation operation;
 
     @JsonIgnore

@@ -8,35 +8,37 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface MetaColumn {
-    String type() default "";
+    String type() default ""; // default
 
-    String formType() default "";
+    String formType() default ""; // default
 
-    String text() default "";
+    String text() default ""; // default
 
-    String value() default "";
+    String value() default ""; // default
 
-    String url() default "";
+    String metadata() default ""; // custom
 
-    String responseKey() default "";
+    String url() default ""; // custom
 
-    String itemText() default "";
+    String responseKey() default ""; // custom
 
-    String tableValue() default "";
+    String itemText() default ""; // custom
 
-    boolean required() default false;
+    String tableValue() default ""; // default
 
-    boolean sortable() default false;
+    boolean required() default false; // default
 
-    boolean searchable() default false;
+    boolean sortable() default false; // custom
 
-    String searchKey() default "";
+    boolean searchable() default false; // custom
 
-    boolean showInTable() default false;
+    String searchKey() default ""; // default
 
-    int width() default 20;
+    boolean showInTable() default false; // custom
 
-    int min() default 1;
+    int width() default 20; // custom
 
-    int max() default 25;
+    int min() default 1; // default
+
+    int max() default 25; // default
 }

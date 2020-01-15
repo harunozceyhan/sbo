@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.JoinColumn;
 import javax.persistence.CascadeType;
 import com.smart.model.base.BaseEntity;
+import com.smart.sbo.annotation.MetaColumn;
 import com.smart.sbo.annotation.Metadata;
 
 import javax.validation.constraints.NotNull;
@@ -32,31 +33,36 @@ import org.springframework.data.rest.core.annotation.RestResource;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Metadata("worker")
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "worker", schema = "postgres")
+@Metadata(value = "worker", title = "workerList", detailTitleKey = "adi", baseUrl = "worker", getUrl = "worker/search/worker", responseKey = "workers")
 public class Worker extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
     @NotNull
     @Column(nullable = false, length = 40)
+    @MetaColumn(sortable = true, searchable = true, showInTable = true, width = 30)
     private String adi;
 
     @NotNull
     @Column(nullable = false, length = 10)
+    @MetaColumn(sortable = true, searchable = true, showInTable = true, width = 15)
     private String kodu;
 
     @NotNull
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     @JsonFormat(pattern = "dd-MM-yyyy", timezone = "Asia/Istanbul")
+    @MetaColumn(sortable = true, searchable = false, showInTable = true, width = 20, searchKey = "WorkDate")
     Date workDate;
 
+    @NotNull
     @ManyToOne()
     @RestResource(exported = false)
     @JoinColumn(name = "siparis_id", nullable = false)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @MetaColumn(sortable = true, searchable = false, showInTable = true, width = 30, formType = "combobox", url = "siparis", responseKey = "siparises", itemText = "adi", tableValue = "siparis.adi", searchKey = "siparisAdi")
     private Siparis siparis;
 
     @JsonIgnore

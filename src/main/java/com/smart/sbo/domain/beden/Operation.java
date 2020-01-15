@@ -49,17 +49,17 @@ public class Operation extends BaseEntity {
     @NotNull
     @Column(nullable = false, length = 10)
     @Length(min = 1, max = 10)
-    @MetaColumn(sortable = true, searchable = true, showInTable = true, width = 35)
+    @MetaColumn(sortable = true, searchable = true, showInTable = true, width = 20)
     private String kodu;
 
     @JsonFormat(pattern = "dd-MM-yyyy", timezone = "Asia/Istanbul")
     @Temporal(TemporalType.DATE)
-    @MetaColumn(sortable = true, searchable = true, showInTable = true, width = 35)
+    @MetaColumn(sortable = true, searchable = true, showInTable = true, width = 30, searchKey = "OperationDate")
     Date operationDate;
 
     @NotNull
     @Column(columnDefinition = "boolean default true", nullable = false)
-    @MetaColumn(sortable = true, searchable = true, showInTable = true, width = 35)
+    @MetaColumn(sortable = true, showInTable = true, width = 10)
     private Boolean active;
 
     @JsonIgnore
