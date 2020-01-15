@@ -17,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.smart.model.base.BaseEntity;
 import com.smart.sbo.annotation.MetaColumn;
+import com.smart.sbo.annotation.MetaTab;
 import com.smart.sbo.annotation.Metadata;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -64,6 +65,7 @@ public class Operation extends BaseEntity {
 
     @JsonIgnore
     @OneToMany(mappedBy = "operation", cascade = CascadeType.ALL)
+    @MetaTab()
     private List<Siparis> siparises;
 
 }

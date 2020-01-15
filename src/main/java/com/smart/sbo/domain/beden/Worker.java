@@ -18,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.CascadeType;
 import com.smart.model.base.BaseEntity;
 import com.smart.sbo.annotation.MetaColumn;
+import com.smart.sbo.annotation.MetaTab;
 import com.smart.sbo.annotation.Metadata;
 
 import javax.validation.constraints.NotNull;
@@ -67,5 +68,6 @@ public class Worker extends BaseEntity {
 
     @JsonIgnore
     @OneToMany(mappedBy = "worker", cascade = CascadeType.ALL)
+    @MetaTab()
     private List<Card> cards;
 }
