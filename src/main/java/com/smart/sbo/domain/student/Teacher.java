@@ -18,6 +18,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.smart.model.base.BaseEntity;
 import com.smart.sbo.annotation.MetaColumn;
+import com.smart.sbo.annotation.MetaTab;
 import com.smart.sbo.annotation.Metadata;
 import org.hibernate.validator.constraints.Length;
 
@@ -52,5 +53,6 @@ public class Teacher extends BaseEntity {
 
     @JsonIgnore
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
+    @MetaTab()
     private List<TeacherLessons> teacherLessons;
 }

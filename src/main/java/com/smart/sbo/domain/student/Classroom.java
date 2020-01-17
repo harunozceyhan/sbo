@@ -18,7 +18,10 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.smart.model.base.BaseEntity;
 import com.smart.sbo.annotation.MetaColumn;
+import com.smart.sbo.annotation.MetaTab;
 import com.smart.sbo.annotation.Metadata;
+
+import org.hibernate.annotations.Formula;
 import org.hibernate.validator.constraints.Length;
 
 @Data
@@ -44,6 +47,9 @@ public class Classroom extends BaseEntity {
     @MetaColumn(sortable = true, searchable = true, showInTable = true, width = 25)
     private String code;
 
+    @Formula("concat(name,' - ',code)")
+    private String nameCode;
+
     @NotNull
     @Column(nullable = false)
     @MetaColumn(sortable = true, searchable = true, showInTable = true, width = 20)
@@ -51,10 +57,12 @@ public class Classroom extends BaseEntity {
 
     @JsonIgnore
     @OneToMany(mappedBy = "classroom", cascade = CascadeType.PERSIST)
+    @MetaTab()
     private List<Student> students;
 
     @JsonIgnore
     @OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL)
+    @MetaTab()
     private List<ClassInventory> classInventories;
 
 }

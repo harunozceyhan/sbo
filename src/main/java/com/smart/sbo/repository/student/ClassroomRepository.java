@@ -20,4 +20,7 @@ public interface ClassroomRepository extends JpaRepository<Classroom, UUID>, Jpa
     public Page<Classroom> classroom(@Param("name") String name, @Param("code") String code,
             @Param("level") Integer level, Pageable p);
 
+    @RestResource(path = "name")
+    public Page<Classroom> findAllByNameCodeContainsIgnoreCase(@Param("val") String nameCode, Pageable p);
+
 }

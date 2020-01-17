@@ -70,7 +70,7 @@ public class Student extends BaseEntity {
     @RestResource(exported = false)
     @JoinColumn(name = "classroom_id", nullable = false)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
-    @MetaColumn(sortable = true, searchable = true, showInTable = true, width = 15, formType = "combobox", url = "classroom", responseKey = "classrooms", itemText = "name", tableValue = "classroom.name", searchKey = "classroomName")
+    @MetaColumn(sortable = true, searchable = true, showInTable = true, width = 15, formType = "autocomplete", url = "classroom/search/name", responseKey = "classrooms", itemText = "nameCode", tableValue = "classroom.name", searchKey = "classroomName")
     private Classroom classroom;
 
     @NotNull
