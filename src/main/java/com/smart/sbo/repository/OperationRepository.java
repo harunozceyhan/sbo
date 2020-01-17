@@ -13,6 +13,6 @@ import org.springframework.data.rest.core.annotation.RestResource;
 @RepositoryRestResource(path = "operation")
 public interface OperationRepository extends JpaRepository<Operation, UUID>, JpaSpecificationExecutor<Operation> {
     @RestResource(path = "name")
-    public Page<Operation> findAllByAdiContainsIgnoreCase(@Param("adi") String adi, Pageable p);
+    public Page<Operation> findAllByAdiContainsIgnoreCase(@Param("val") String adi, Pageable p);
 
 }

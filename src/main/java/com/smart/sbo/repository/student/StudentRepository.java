@@ -23,4 +23,7 @@ public interface StudentRepository extends JpaRepository<Student, UUID>, JpaSpec
             @Param("surname") String surname, @Param("grade") Integer grade,
             @Param("classroomName") String classroomName, Pageable p);
 
+    @RestResource(path = "classroom")
+    public Page<Student> findAllByClassroom_Id(@Param("id") UUID id, Pageable p);
+
 }
