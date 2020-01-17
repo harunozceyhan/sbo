@@ -105,8 +105,11 @@ public class MetaDataServiceImpl implements MetaDataService {
         } else if (fieldType.equals("Boolean")) {
             columnsMap.put("type", fieldMeta.type().equals("") ? "boolean" : fieldMeta.type());
             columnsMap.put("formType", fieldMeta.formType().equals("") ? "checkbox" : fieldMeta.formType());
-        } else if (fieldType.equals("Integer") || fieldType.equals("Double") || fieldType.equals("Float")) {
-            columnsMap.put("type", fieldMeta.type().equals("") ? "number" : fieldMeta.type());
+        } else if (fieldType.equals("Integer")) {
+            columnsMap.put("type", fieldMeta.type().equals("") ? "integer" : fieldMeta.type());
+            columnsMap.put("formType", fieldMeta.formType().equals("") ? "text" : fieldMeta.formType());
+        } else if (fieldType.equals("Double") || fieldType.equals("Float")) {
+            columnsMap.put("type", fieldMeta.type().equals("") ? "float" : fieldMeta.type());
             columnsMap.put("formType", fieldMeta.formType().equals("") ? "text" : fieldMeta.formType());
         } else { // Object
             columnsMap.put("type", fieldMeta.type().equals("") ? "object" : fieldMeta.type());

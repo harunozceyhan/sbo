@@ -46,13 +46,12 @@ public class Classroom extends BaseEntity {
 
     @NotNull
     @Column(nullable = false)
-    @Length(min = 1, max = 10)
     @MetaColumn(sortable = true, searchable = true, showInTable = true, width = 20)
     private Integer level;
 
     @JsonIgnore
     @OneToMany(mappedBy = "classroom", cascade = CascadeType.PERSIST)
-    private List<Student> cards;
+    private List<Student> students;
 
     @JsonIgnore
     @OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL)
