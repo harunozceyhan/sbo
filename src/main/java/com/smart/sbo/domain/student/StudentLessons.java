@@ -18,7 +18,6 @@ import com.smart.sbo.annotation.Metadata;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import org.hibernate.validator.constraints.Length;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 @Data
@@ -27,7 +26,7 @@ import org.springframework.data.rest.core.annotation.RestResource;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "student_lesson", schema = "postgres")
-@Metadata(value = "studentLesson", title = "studentLessonList", baseUrl = "studentLesson", getUrl = "studentLesson/search/studentLesson", responseKey = "studentLessons")
+@Metadata(value = "studentLesson", title = "studentLessonList", baseUrl = "studentLesson", getUrl = "studentLesson/search/studentLesson", responseKey = "studentLessonses")
 public class StudentLessons extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
@@ -37,7 +36,7 @@ public class StudentLessons extends BaseEntity {
     @RestResource(exported = false)
     @JoinColumn(name = "student_id", nullable = false)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
-    @MetaColumn(sortable = true, searchable = false, showInTable = true, width = 40, formType = "combobox", url = "student", responseKey = "students", itemText = "name", tableValue = "student.name", searchKey = "studentName")
+    @MetaColumn(sortable = true, searchable = true, showInTable = true, width = 85, formType = "combobox", url = "student", responseKey = "students", itemText = "name", tableValue = "student.name", searchKey = "studentName")
     private Student student;
 
     @NotNull
@@ -45,12 +44,11 @@ public class StudentLessons extends BaseEntity {
     @RestResource(exported = false)
     @JoinColumn(name = "lesson_id", nullable = false)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
-    @MetaColumn(sortable = true, searchable = false, showInTable = true, width = 40, formType = "combobox", url = "lesson", responseKey = "lessons", itemText = "name", tableValue = "lesson.name", searchKey = "lessonName")
+    @MetaColumn(sortable = true, searchable = true, showInTable = true, width = 85, formType = "combobox", url = "lesson", responseKey = "lessons", itemText = "name", tableValue = "lesson.name", searchKey = "lessonName")
     private Lesson lesson;
 
     @NotNull
     @Column(nullable = false)
-    @Length(min = 1, max = 4)
-    @MetaColumn(sortable = true, searchable = true, showInTable = true, width = 10)
+    @MetaColumn(sortable = true, searchable = false, showInTable = true, width = 10)
     private Float grade;
 }

@@ -28,7 +28,7 @@ import org.springframework.data.rest.core.annotation.RestResource;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "class_inventroy", schema = "postgres")
-@Metadata(value = "classInventory", title = "classInventoryList", detailTitleKey = "name", baseUrl = "classInventory", getUrl = "classInventory/search/classInventory", responseKey = "classInventorys")
+@Metadata(value = "classInventory", title = "classInventoryList", detailTitleKey = "name", baseUrl = "classInventory", getUrl = "classInventory/search/classInventory", responseKey = "classInventories")
 public class ClassInventory extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
@@ -47,8 +47,7 @@ public class ClassInventory extends BaseEntity {
 
     @NotNull
     @Column(nullable = false)
-    @Length(min = 1, max = 4)
-    @MetaColumn(sortable = true, searchable = true, showInTable = true, width = 20)
+    @MetaColumn(sortable = true, searchable = false, showInTable = true, width = 20)
     private Integer count;
 
     @NotNull

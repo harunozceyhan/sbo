@@ -23,7 +23,10 @@ public interface StudentRepository extends JpaRepository<Student, UUID>, JpaSpec
             @Param("surname") String surname, @Param("grade") Integer grade,
             @Param("classroomName") String classroomName, Pageable p);
 
+    @Query("SELECT s FROM Student s WHERE s.classroom.id = :id AND (:studentNumber = '' OR CAST(s.studentNumber AS string) LIKE %:studentNumber%) AND (:name = '' OR LOWER(s.name) LIKE LOWER(concat('%', concat(:name, '%')))) AND"
+            + " (:surname = '' OR LOWER(s.surname) LIKE LOWER(concat('%', concat(:surname, '%')))) AND (:grade IS NULL OR s.grade = :grade)")
     @RestResource(path = "classroom")
-    public Page<Student> findAllByClassroom_Id(@Param("id") UUID id, Pageable p);
+    public Page<Student> classroom(@Param("id") UUID id, @Param("studentNumber") String studentNumber,
+            @Param("name") String name, @Param("surname") String surname, @Param("grade") Integer grade, Pageable p);
 
 }

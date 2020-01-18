@@ -26,7 +26,7 @@ import org.springframework.data.rest.core.annotation.RestResource;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "teacher_lesson", schema = "postgres")
-@Metadata(value = "teacherLesson", title = "teacherLessonList", baseUrl = "teacherLesson", getUrl = "teacherLesson/search/teacherLesson", responseKey = "teacherLessons")
+@Metadata(value = "teacherLesson", title = "teacherLessonList", baseUrl = "teacherLesson", getUrl = "teacherLesson/search/teacherLesson", responseKey = "teacherLessonses")
 public class TeacherLessons extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
@@ -36,7 +36,7 @@ public class TeacherLessons extends BaseEntity {
     @RestResource(exported = false)
     @JoinColumn(name = "teacher_id", nullable = false)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
-    @MetaColumn(sortable = true, searchable = false, showInTable = true, width = 45, formType = "combobox", url = "teacher", responseKey = "teachers", itemText = "name", tableValue = "teacher.name", searchKey = "teacherName")
+    @MetaColumn(sortable = true, searchable = true, showInTable = true, width = 95, formType = "combobox", url = "teacher", responseKey = "teachers", itemText = "name", tableValue = "teacher.name", searchKey = "teacherName")
     private Teacher teacher;
 
     @NotNull
@@ -44,7 +44,7 @@ public class TeacherLessons extends BaseEntity {
     @RestResource(exported = false)
     @JoinColumn(name = "lesson_id", nullable = false)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
-    @MetaColumn(sortable = true, searchable = false, showInTable = true, width = 45, formType = "combobox", url = "lesson", responseKey = "lessons", itemText = "name", tableValue = "lesson.name", searchKey = "lessonName")
+    @MetaColumn(sortable = true, searchable = true, showInTable = true, width = 95, formType = "combobox", url = "lesson", responseKey = "lessons", itemText = "name", tableValue = "lesson.name", searchKey = "lessonName")
     private Lesson lesson;
 
 }
