@@ -57,7 +57,7 @@ public class Siparis extends BaseEntity {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss", timezone = "Asia/Istanbul")
-    @MetaColumn(sortable = true, searchable = false, showInTable = true, width = 20, formType = "datetimepicker")
+    @MetaColumn(sortable = true, searchable = true, showInTable = true, width = 20, formType = "datetimepicker", searchKey = "OrderDate")
     Date orderDate;
 
     @NotNull
