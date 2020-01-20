@@ -11,8 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
 import javax.validation.constraints.NotNull;
 import com.smart.model.base.BaseEntity;
-import com.smart.sbo.annotation.MetaColumn;
-import com.smart.sbo.annotation.Metadata;
+import com.smart.annotation.MetaColumn;
+import com.smart.annotation.Metadata;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;

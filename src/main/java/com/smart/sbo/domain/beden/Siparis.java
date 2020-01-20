@@ -19,9 +19,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.CascadeType;
 import javax.validation.constraints.NotNull;
 import com.smart.model.base.BaseEntity;
-import com.smart.sbo.annotation.MetaColumn;
-import com.smart.sbo.annotation.MetaTab;
-import com.smart.sbo.annotation.Metadata;
+import com.smart.annotation.MetaColumn;
+import com.smart.annotation.Metadata;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -70,6 +69,5 @@ public class Siparis extends BaseEntity {
 
     @JsonIgnore
     @OneToMany(mappedBy = "siparis", cascade = CascadeType.ALL)
-    @MetaTab()
     private List<Worker> workers;
 }

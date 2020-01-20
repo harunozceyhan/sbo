@@ -23,9 +23,9 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.smart.model.base.BaseEntity;
-import com.smart.sbo.annotation.MetaColumn;
-import com.smart.sbo.annotation.MetaTab;
-import com.smart.sbo.annotation.Metadata;
+import com.smart.annotation.MetaColumn;
+import com.smart.annotation.MetaTab;
+import com.smart.annotation.Metadata;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -92,7 +92,7 @@ public class Student extends BaseEntity {
 
     @JsonIgnore
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
-    @MetaTab()
+    @MetaTab("inline")
     private List<StudentLessons> studentLessons;
 
 }
