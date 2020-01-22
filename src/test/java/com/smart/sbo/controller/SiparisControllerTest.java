@@ -50,7 +50,8 @@ public class SiparisControllerTest {
     }
 
     public String addSiparis(String operationId) throws Exception {
-        String siparisData = "{\"adi\":\"Sipariş 1\",\"kodu\":\"S1\",\"operation\":{\"id\":\"" + operationId + "\"}}";
+        String siparisData = "{\"adi\":\"Sipariş 1\",\"kodu\":\"S1\",\"orderDate\":\"19-01-1992 14:00:00\",\"operation\":{\"id\":\""
+                + operationId + "\"}}";
         JsonObject responseJson = JsonParser
                 .parseString(this.mockMvc.perform(post("/siparis").content(siparisData).accept(MediaType.ALL))
                         .andExpect(status().isCreated()).andReturn().getResponse().getContentAsString())
