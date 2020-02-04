@@ -3,7 +3,7 @@ spring:
     cloud:
         consul:
             enabled: true
-            host: test.smartiys.io
+            host: consul.smart
             port: 8500
             discovery:
                 acl-token: ad36b34c-8c99-6a3a-c374-c15312f19a1e

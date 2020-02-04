@@ -3,12 +3,12 @@ services:
     - docker:dind
 
 variables:
-    APP_NAME: "sbo"
-    REGISTRY_USER: "admin"
-    REGISTRY_PASSWORD: "ibsvo2983asd"
-    PRIVATE_DEV_REGISTRY: "nexus.smartiys.com:5000"
-    PRIVATE_PROD_REGISTRY: "nexus.smartiys.com:5001"
-    PROD_IMAGE_TAG: "$PRIVATE_PROD_REGISTRY/$APP_NAME:$CI_COMMIT_TAG"
+    APP_NAME: 'sbo'
+    REGISTRY_USER: 'admin'
+    REGISTRY_PASSWORD: 'ibsvo2983asd'
+    PRIVATE_DEV_REGISTRY: 'nexus.smartiys.com:5000'
+    PRIVATE_PROD_REGISTRY: 'nexus.smartiys.com:5001'
+    PROD_IMAGE_TAG: '$PRIVATE_PROD_REGISTRY/$APP_NAME:$CI_COMMIT_TAG'
 
 stages:
     - build
@@ -19,7 +19,7 @@ build:
     image: maven:3.6.3-jdk-11-slim
     stage: build
     script:
-        - 'mvn package -Dspring.config.location=classpath:application-stage.yml -B'
+        - 'mvn package -Dspring.config.location=classpath:application-stage.yml -B' # application-test.yml file used for test cases. application-stage.yml usef for test environment
     artifacts:
         paths:
             - target/*.jar
