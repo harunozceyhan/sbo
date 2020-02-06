@@ -6,8 +6,8 @@ variables:
     APP_NAME: 'sbo'
     REGISTRY_USER: 'admin'
     REGISTRY_PASSWORD: 'ibsvo2983asd'
-    PRIVATE_DEV_REGISTRY: 'nexus.smartiys.com:5000'
-    PRIVATE_PROD_REGISTRY: 'nexus.smartiys.com:5001'
+    PRIVATE_DEV_REGISTRY: 'nexus.smartiys.io:5000'
+    PRIVATE_PROD_REGISTRY: 'nexus.smartiys.io:5001'
     PROD_IMAGE_TAG: '$PRIVATE_PROD_REGISTRY/$APP_NAME:$CI_COMMIT_TAG'
 
 stages:
@@ -59,10 +59,10 @@ deploy_staging:
         - apk upgrade && apk update
         - apk add openssh-client
         - apk add sshpass
-        - sshpass -p "MTsmart44" ssh -o StrictHostKeyChecking=no test@test.smartiys.com "docker ps -a | awk '{ print \$1,\$2 }' | grep $APP_NAME | awk '{print \$1 }' | xargs -I {} docker container stop {} && docker ps -a | awk '{ print \$1,\$2 }' | grep $APP_NAME | awk '{print \$1 }' | xargs -I {} docker rm -v {} && docker rmi $PRIVATE_DEV_REGISTRY/$APP_NAME || true"
-        - sshpass -p "MTsmart44" ssh -o StrictHostKeyChecking=no test@test.smartiys.com docker login -u $REGISTRY_USER -p $REGISTRY_PASSWORD $PRIVATE_DEV_REGISTRY
-        - sshpass -p "MTsmart44" ssh -o StrictHostKeyChecking=no test@test.smartiys.com docker pull $PRIVATE_DEV_REGISTRY/$APP_NAME
-        - sshpass -p "MTsmart44" ssh -o StrictHostKeyChecking=no test@test.smartiys.com docker run --name $APP_NAME-$CI_COMMIT_TAG --network=dev-net --net-alias=$APP_NAME.smart -p 8081:8081 -d $PRIVATE_DEV_REGISTRY/$APP_NAME
+        - sshpass -p "MTsmart44" ssh -o StrictHostKeyChecking=no test@test.smartiys.io "docker ps -a | awk '{ print \$1,\$2 }' | grep $APP_NAME | awk '{print \$1 }' | xargs -I {} docker container stop {} && docker ps -a | awk '{ print \$1,\$2 }' | grep $APP_NAME | awk '{print \$1 }' | xargs -I {} docker rm -v {} && docker rmi $PRIVATE_DEV_REGISTRY/$APP_NAME || true"
+        - sshpass -p "MTsmart44" ssh -o StrictHostKeyChecking=no test@test.smartiys.io docker login -u $REGISTRY_USER -p $REGISTRY_PASSWORD $PRIVATE_DEV_REGISTRY
+        - sshpass -p "MTsmart44" ssh -o StrictHostKeyChecking=no test@test.smartiys.io docker pull $PRIVATE_DEV_REGISTRY/$APP_NAME
+        - sshpass -p "MTsmart44" ssh -o StrictHostKeyChecking=no test@test.smartiys.io docker run --name $APP_NAME-$CI_COMMIT_TAG --network=dev-net --net-alias=$APP_NAME.smart -p 8083:8083 -d $PRIVATE_DEV_REGISTRY/$APP_NAME
     after_script:
         - docker rmi $PRIVATE_DEV_REGISTRY/$APP_NAME
     only:
