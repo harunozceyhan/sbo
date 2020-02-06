@@ -34,7 +34,7 @@
         <dependency>
             <groupId>com.smart</groupId>
             <artifactId>smart-core-plugin</artifactId>
-            <version>0.5.2</version>
+            <version>0.5.5</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
