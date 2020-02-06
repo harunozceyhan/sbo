@@ -19,7 +19,7 @@ build:
     image: maven:3.6.3-jdk-11-slim
     stage: build
     script:
-        - 'mvn package -Dspring.config.location=classpath:application-stage.yml -B' # application-test.yml file used for test cases. application-stage.yml usef for test environment
+        - 'mvn package -Dspring.config.location=classpath:bootstrap-stage.yml -B' # bootstrap-test.yml file used for test cases. bootstrap-stage.yml usef for test environment
     artifacts:
         paths:
             - target/*.jar
